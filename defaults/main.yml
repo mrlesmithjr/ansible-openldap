@@ -1,0 +1,5 @@
+---
+# defaults file for ansible-openldap
+openldap_debian_packages:
+  - slapd
+  - ldap-utils
