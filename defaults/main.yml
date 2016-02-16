@@ -13,6 +13,7 @@ openldap_organizationalunits:  #defines OU's to populate
   - People
   - Groups
 openldap_phpldapadmin_hide_warnings: 'true'
+openldap_populate: false  #defines if openldap DB should be populated with openldap_organizationalunits, openldap_posixgroups and openldap_users
 openldap_posixgroups:  #defines groups to create within OU's
   - name: miners
     ou: Groups

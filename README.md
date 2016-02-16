@@ -1,31 +1,103 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Installs and configures OpenLDAP and phpLDAPadmin  
+http://www.openldap.org/
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Install requirements using Ansible Galaxy.
+````
+sudo ansible-galaxy install -r requirements.yml -f
+````
+
+Vagrant
+-------
+Spin up Vagrant environment
+````
+vagrant up
+````
+
+Log into phpLDAPadmin  
+http://127.0.0.1:8080/phpldapadmin
+````
+user: cn=admin,dc=vagrant,dc=local
+password: P@55w0rd
+````
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+````
+---
+# defaults file for ansible-openldap
+openldap_admin_password: 'P@55w0rd'
+openldap_admin_user: 'admin'
+openldap_base: 'dc=example,dc=org'
+openldap_bind_id: 'cn={{ openldap_bind_user }},{{ openldap_base }}'
+openldap_bind_user: '{{ openldap_admin_user }}'
+openldap_debian_packages:
+  - slapd
+  - ldap-utils
+  - phpldapadmin
+openldap_organizationalunits:  #defines OU's to populate
+  - People
+  - Groups
+openldap_phpldapadmin_hide_warnings: 'true'
+openldap_posixgroups:  #defines groups to create within OU's
+  - name: miners
+    ou: Groups
+    gidNum: 5000  #start group numbers at 5000 and up
+openldap_server_host: '127.0.0.1'  #defines host for phpLDAPadmin
+openldap_users:
+  - FirstName: John
+    LastName: Smith
+    ou: People  #defines OU name
+    uidNum: 10000  #start user numbers at 10000 and up
+    gidNum: 5000  #defines gidNum from openldap_posixgroups
+    password: 'P@55w0rd'
+    loginShell: /bin/bash
+    homeDirectory: /home/john
+pri_domain_name: 'example.org'
+````
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Install via info in requirements  
+ansible-etc-hosts
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+#### GitHub
+````
+---
+- hosts: all
+  become: true
+  vars:
+    - openldap_base: 'dc=vagrant,dc=local'
+    - pri_domain_name: vagrant.local
+  roles:
+    - role: ansible-etc-hosts
+    - role: ansible-openldap
+  tasks:
+````
+#### Galaxy
+````
+---
+- hosts: all
+  become: true
+  vars:
+    - openldap_base: 'dc=vagrant,dc=local'
+    - pri_domain_name: vagrant.local
+  roles:
+    - role: mrlesmithjr.etc-hosts
+    - role: mrlesmithjr.openldap
+  tasks:
+````
 
 License
 -------
@@ -35,4 +107,7 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Larry Smith Jr.
+- @mrlesmithjr
+- http://everythingshouldbevirtual.com
+- mrlesmithjr [at] gmail.com

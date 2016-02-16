@@ -22,4 +22,10 @@
     owner: root
     group: root
     mode: 0640
-    
+
+- name: config_openldap | populating openLDAP
+  shell: 'ldapadd -x -D {{ openldap_bind_id }} -w {{ openldap_admin_password }} -f /etc/ldap/slapd.d/populate_content.ldif'
+  ignore_errors: yes  #set to get around erroring out that items already exist
+  when: >
+        openldap_populate is defined and
+        openldap_populate

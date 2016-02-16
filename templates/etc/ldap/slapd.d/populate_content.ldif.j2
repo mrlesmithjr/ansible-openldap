@@ -1,6 +1,7 @@
 {% for item in openldap_organizationalunits %}
 dn: ou={{ item }},{{ openldap_base }}
-objectClass: organizationUnit
+objectClass: organizationalUnit
+
 {% endfor %}
 
 {% for item in openldap_posixgroups %}
