@@ -1,0 +1,16 @@
+---
+- name: config_openldap | configuring ldap
+  template:
+    src: "etc/ldap/ldap.conf.j2"
+    dest: "/etc/ldap/ldap.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: config_openldap | configuring phpldapadmin
+  template:
+    src: "etc/phpldapadmin/config.php.j2"
+    dest: "/etc/phpldapadmin/config.php"
+    owner: root
+    group: www-data
+    mode: 0640

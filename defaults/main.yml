@@ -1,5 +1,12 @@
 ---
 # defaults file for ansible-openldap
+openldap_base: 'dc=example,dc=org'
+openldap_bind_id: 'cn={{ openldap_bind_user }},{{ openldap_base }}'
+openldap_bind_user: admin
 openldap_debian_packages:
   - slapd
   - ldap-utils
+  - phpldapadmin
+openldap_phpldapadmin_hide_warnings: 'true'
+openldap_server_host: 127.0.0.1  #defines host for phpLDAPadmin
+pri_domain_name: example.org
