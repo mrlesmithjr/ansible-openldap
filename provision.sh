@@ -8,7 +8,5 @@ elif [ -f /etc/redhat-release ]; then
   yum install -y git python-pip python-devel python-dnf
 fi
 sudo pip install ansible
-sudo mkdir -p /etc/ansible/roles
-sudo ln -s /vagrant /etc/ansible/roles/ansible-openldap
 sudo ansible-galaxy install -r /vagrant/requirements.yml -f
 ansible-playbook -i "localhost," -c local /vagrant/playbook.yml
