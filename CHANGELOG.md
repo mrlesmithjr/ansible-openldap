@@ -1,3 +1,15 @@
+commit 8419056f7c519fc81b63031ef59d942a34e26511
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:38:24 2020 -0500
+
+    Fixing Ansible linting
+
+commit 5276cf3dd8bc58de197c54c387b8bd8420286892
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:31:10 2020 -0500
+
+    Updated CHANGELOG
+
 commit 942511e1168d42c41ad7b4172371b9c104263e9d
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Feb 27 18:30:51 2020 -0500
