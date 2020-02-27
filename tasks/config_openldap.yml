@@ -1,55 +1,49 @@
 ---
 - name: config_openldap | configuring ldap
   template:
-    src: "etc/ldap/ldap.conf.j2"
-    dest: "/etc/ldap/ldap.conf"
+    src: etc/ldap/ldap.conf.j2
+    dest: /etc/ldap/ldap.conf
     owner: root
     group: root
     mode: 0644
+  become: true
 
 - name: config_openldap | configuring phpldapadmin
   template:
-    src: "etc/phpldapadmin/config.php.j2"
-    dest: "/etc/phpldapadmin/config.php"
+    src: etc/phpldapadmin/config.php.j2
+    dest: /etc/phpldapadmin/config.php
     owner: root
     group: www-data
     mode: 0640
+  become: true
 
 - name: config_openldap | creating database population config
   template:
-    src: "etc/ldap/slapd.d/populate_content.ldif.j2"
-    dest: "/etc/ldap/slapd.d/populate_content.ldif"
+    src: etc/ldap/slapd.d/populate_content.ldif.j2
+    dest: /etc/ldap/slapd.d/populate_content.ldif
     owner: root
     group: root
     mode: 0640
+  become: true
 
 - name: config_openldap | setting admin password
   shell: slappasswd -s {{ openldap_admin_password }}
-  register: admin_password
-
-#- name: config_openldap | restart slapd
-#  systemd:
-#    name: slapd
-#    enabled: yes
-#    daemon_reload: yes
-#    state: restarted
-#  when: >
-#    admin_password is defined and
-#    admin_password
+  register: _openldap_admin_password
+  become: true
 
 - name: config_openldap | restart slapd
   service:
     name: slapd
-    enabled: yes
-    #daemon_reload: yes
+    enabled: true
     state: restarted
-  when: >
-    admin_password is defined and
-    admin_password
+  when:
+    - _openldap_admin_password is defined
 
+# Ignore errors to get around erroring out that items already exist
+# This needs to be more idempotent
 - name: config_openldap | populating openLDAP
-  shell: 'ldapadd -x -D {{ openldap_bind_id }} -w {{ openldap_admin_password }} -f /etc/ldap/slapd.d/populate_content.ldif'
-  ignore_errors: yes  #set to get around erroring out that items already exist
-  when: >
-        openldap_populate is defined and
-        openldap_populate
+  shell: "ldapadd -x -D {{ openldap_bind_id }} -w {{ openldap_admin_password }} -f /etc/ldap/slapd.d/populate_content.ldif"
+  ignore_errors: true
+  when:
+    - openldap_populate is defined
+    - openldap_populate|bool

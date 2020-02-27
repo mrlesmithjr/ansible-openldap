@@ -1,6 +1,7 @@
 ---
 # tasks file for ansible-openldap
-- include: debian.yml
+- include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: config_openldap.yml
+- include_tasks: config_openldap.yml
+  when: openldap_config|bool
