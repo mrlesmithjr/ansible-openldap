@@ -1,3 +1,27 @@
+commit 942511e1168d42c41ad7b4172371b9c104263e9d
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:30:51 2020 -0500
+
+    Updated playbook format
+
+commit 3f0c1680960b89f22c0a4c3b2b911e27b3f27745
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:30:35 2020 -0500
+
+    Cleaned up formatting, etc.
+
+commit 61ef009a630f0a68a1fe082b47fd513cc48cdaa8
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:30:02 2020 -0500
+
+    Disabled all tests except Ubuntu
+
+commit c170a264255e48ee65ec5d5a0acaae9c2ce88f75
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:05:41 2020 -0500
+
+    Added new Molecule tests, etc. from new structure
+
 commit 2e3e48657c8b6bc88c1d9751e41b16d6bddb4fb1
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Feb 27 18:05:27 2020 -0500
