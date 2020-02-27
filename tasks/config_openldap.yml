@@ -26,7 +26,7 @@
     mode: 0640
   become: true
 
-- name: config_openldap | setting admin password
+- name: config_openldap | setting admin password # noqa 301 305
   shell: slappasswd -s {{ openldap_admin_password }}
   register: _openldap_admin_password
   become: true
@@ -41,7 +41,7 @@
 
 # Ignore errors to get around erroring out that items already exist
 # This needs to be more idempotent
-- name: config_openldap | populating openLDAP
+- name: config_openldap | populating openLDAP # noqa 305
   shell: "ldapadd -x -D {{ openldap_bind_id }} -w {{ openldap_admin_password }} -f /etc/ldap/slapd.d/populate_content.ldif"
   ignore_errors: true
   when:
