@@ -1,3 +1,17 @@
+commit eab1855654d8429988fa916a4b2d334335c1d901
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 19:51:02 2020 -0500
+
+    Disabled ansible-etc-hosts role
+    
+    - Not needed for now plus causes issues with testing in containers
+
+commit 6d6ed4cab029cd6e7e704e21f4693f58250a2eb7
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 18:38:33 2020 -0500
+
+    Updated changelog
+
 commit 8419056f7c519fc81b63031ef59d942a34e26511
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Feb 27 18:38:24 2020 -0500
