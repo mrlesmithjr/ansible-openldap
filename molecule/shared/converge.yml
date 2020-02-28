@@ -4,9 +4,9 @@
   vars:
     etc_hosts_add_all_hosts: true
   tasks:
-    - name: Include ansible-etc-hosts
-      include_role:
-        name: ansible-etc-hosts
+    # - name: Include ansible-etc-hosts
+    #   include_role:
+    #     name: ansible-etc-hosts
     - name: Include ansible-openldap
       include_role:
         name: ansible-openldap
