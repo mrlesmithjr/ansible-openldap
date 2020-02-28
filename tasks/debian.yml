@@ -5,6 +5,9 @@
     question: "{{ item['question'] }}"
     value: "{{ item['value'] }}"
     vtype: "{{ item['vtype'] }}"
+  become: true
+  changed_when: false
+  no_log: true
   loop:
     - question: slapd/internal/generated_adminpw
       value: "{{ openldap_admin_password }}"
