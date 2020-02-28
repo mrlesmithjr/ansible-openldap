@@ -1,3 +1,18 @@
+commit 9a1445b592d07cff4cf75085dd9cb61b01ed9ee8
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 20:00:19 2020 -0500
+
+    Resolving idempotency issue
+    
+    - Added changed_when false for debconf settings.
+    - These settings should not be seen as a change.
+
+commit 9cd47212e5b3da367aa906d549942613b9712093
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Feb 27 19:51:11 2020 -0500
+
+    Updated changelog
+
 commit eab1855654d8429988fa916a4b2d334335c1d901
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Feb 27 19:51:02 2020 -0500
