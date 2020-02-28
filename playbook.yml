@@ -1,9 +1,15 @@
 ---
-- hosts: all
-  become: true
+- name: Example Playbook
+  hosts: all
   vars:
-    - openldap_base: 'dc=vagrant,dc=local'
-    - pri_domain_name: vagrant.local
-  roles:
-    - role: ansible-etc-hosts
-    - role: ansible-openldap
+    etc_hosts_add_all_hosts: true
+    openldap_base: "dc=vagrant,dc=local"
+    openldap_domain_name: "{{ pri_domain_name }}"
+    pri_domain_name: vagrant.local
+  tasks:
+    - name: Include ansible-etc-hosts
+      include_role:
+        name: ansible-etc-hosts
+    - name: Include ansible-openldap
+      include_role:
+        name: ansible-openldap

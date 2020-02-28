@@ -1,32 +1,37 @@
 ---
 - name: debian | definining openldap install settings
   debconf:
-    name: "slapd"
-    question: "{{ item.question }}"
-    value: "{{ item.value }}"
-    vtype: "{{ item.vtype }}"
-  with_items:
-    - question: 'slapd/internal/generated_adminpw'
-      value: '{{ openldap_admin_password }}'
-      vtype: 'password'
-    - question: 'slapd/password2'
-      value: '{{ openldap_admin_password }}'
-      vtype: 'password'
-    - question: 'slapd/internal/adminpw'
-      value: '{{ openldap_admin_password }}'
-      vtype: 'password'
-    - question: 'slapd/password1'
-      value: '{{ openldap_admin_password }}'
-      vtype: 'password'
-    - question: "slapd/domain"
-      value: "{{ pri_domain_name }}"
-      vtype: 'string'
-    - question: "shared/organization"
+    name: slapd
+    question: "{{ item['question'] }}"
+    value: "{{ item['value'] }}"
+    vtype: "{{ item['vtype'] }}"
+  become: true
+  changed_when: false
+  no_log: true
+  loop:
+    - question: slapd/internal/generated_adminpw
+      value: "{{ openldap_admin_password }}"
+      vtype: password
+    - question: slapd/password2
+      value: "{{ openldap_admin_password }}"
+      vtype: password
+    - question: slapd/internal/adminpw
+      value: "{{ openldap_admin_password }}"
+      vtype: password
+    - question: slapd/password1
+      value: "{{ openldap_admin_password }}"
+      vtype: password
+    - question: slapd/domain
+      value: "{{ openldap_domain_name }}"
+      vtype: string
+    - question: shared/organization
       value: "{{ openldap_org }}"
-      vtype: 'string'
+      vtype: string
 
 - name: debian | installing packages
   apt:
-    name: "{{ item }}"
+    name: "{{ openldap_debian_packages }}"
     state: present
-  with_items: "{{ openldap_debian_packages }}"
+  become: true
+  register: result
+  until: result is successful

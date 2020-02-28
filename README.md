@@ -1,114 +1,42 @@
-Role Name
-=========
+# ansible-openldap
 
-Installs and configures OpenLDAP and phpLDAPadmin  
-http://www.openldap.org/
+Installs and configures [OpenLDAP](http://www.openldap.org/) and phpLDAPadmin
 
-Requirements
-------------
+## Build Status
 
-Install requirements using Ansible Galaxy.
-````
-sudo ansible-galaxy install -r requirements.yml -f
-````
+### GitHub Actions
 
-Vagrant
--------
-Spin up Vagrant environment
-````
-vagrant up
-````
+![Molecule Test](https://github.com/mrlesmithjr/ansible-openldap/workflows/Molecule%20Test/badge.svg)
 
-Log into phpLDAPadmin  
-http://127.0.0.1:8080/phpldapadmin
-````
-user: cn=admin,dc=vagrant,dc=local
-password: P@55w0rd
-````
+### Travis CI
 
-Role Variables
---------------
+[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-openldap.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-openldap)
 
-````
----
-# defaults file for ansible-openldap
-openldap_admin_password: 'P@55w0rd'
-openldap_admin_user: 'admin'
-openldap_base: 'dc=example,dc=org'
-openldap_bind_id: 'cn={{ openldap_bind_user }},{{ openldap_base }}'
-openldap_bind_user: '{{ openldap_admin_user }}'
-openldap_debian_packages:
-  - slapd
-  - ldap-utils
-  - phpldapadmin
-openldap_organizationalunits:  #defines OU's to populate
-  - People
-  - Groups
-openldap_phpldapadmin_hide_warnings: 'true'
-openldap_populate: false  #defines if openldap DB should be populated with openldap_organizationalunits, openldap_posixgroups and openldap_users
-openldap_posixgroups:  #defines groups to create within OU's
-  - name: miners
-    ou: Groups
-    gidNum: 5000  #start group numbers at 5000 and up
-openldap_server_host: '127.0.0.1'  #defines host for phpLDAPadmin
-openldap_users:
-  - FirstName: John
-    LastName: Smith
-    ou: People  #defines OU name
-    uidNum: 10000  #start user numbers at 10000 and up
-    gidNum: 5000  #defines gidNum from openldap_posixgroups
-    password: 'P@55w0rd'
-    loginShell: /bin/bash
-    homeDirectory: /home/john
-pri_domain_name: 'example.org'
-````
+## Requirements
 
-Dependencies
-------------
+For any required Ansible roles, review:
+[requirements.yml](requirements.yml)
 
-Install via info in requirements  
-ansible-etc-hosts
+## Role Variables
 
+[defaults/main.yml](defaults/main.yml)
 
-Example Playbook
-----------------
+## Dependencies
 
-#### GitHub
-````
----
-- hosts: all
-  become: true
-  vars:
-    - openldap_base: 'dc=vagrant,dc=local'
-    - pri_domain_name: vagrant.local
-  roles:
-    - role: ansible-etc-hosts
-    - role: ansible-openldap
-  tasks:
-````
-#### Galaxy
-````
----
-- hosts: all
-  become: true
-  vars:
-    - openldap_base: 'dc=vagrant,dc=local'
-    - pri_domain_name: vagrant.local
-  roles:
-    - role: mrlesmithjr.etc-hosts
-    - role: mrlesmithjr.openldap
-  tasks:
-````
+## Example Playbook
 
-License
--------
+[playbook.yml](playbook.yml)
 
-BSD
+## License
 
-Author Information
-------------------
+MIT
+
+## Author Information
 
 Larry Smith Jr.
-- @mrlesmithjr
-- http://everythingshouldbevirtual.com
-- mrlesmithjr [at] gmail.com
+
+- [@mrlesmithjr](https://twitter.com/mrlesmithjr)
+- [mrlesmithjr@gmail.com](mailto:mrlesmithjr@gmail.com)
+- [http://everythingshouldbevirtual.com](http://everythingshouldbevirtual.com)
+
+> NOTE: Repo has been created/updated using [https://github.com/mrlesmithjr/cookiecutter-ansible-role](https://github.com/mrlesmithjr/cookiecutter-ansible-role) as a template.
