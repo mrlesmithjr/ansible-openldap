@@ -16,6 +16,7 @@
     group: www-data
     mode: 0640
   become: true
+  when: '"phpldapadmin" in openldap_debian_packages'
 
 - name: config_openldap | creating database population config
   template:
