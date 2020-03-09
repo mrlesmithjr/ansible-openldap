@@ -1,0 +1,45 @@
+---
+- name: config_openldap_schemas | copying schemas files
+  copy:
+    src: '{{ item }}'
+    dest: '/etc/ldap/schema/'
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  with_fileglob:
+    - 'files/openldap/schema/*.schema'
+  become: true
+
+- name: config_openldap_schemas | creating temp folder
+  file:
+    path: '{{ openldap_ldif_tmp_dir }}'
+    state: directory
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  become: true
+
+- name: config_openldap_schemas | creating a conversion file
+  template:
+    src: etc/ldap/slapd.d/schema_conversion.conf.j2
+    dest: '{{ openldap_ldif_tmp_dir }}/schema_conversion.conf'
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: config_openldap_schemas | covertyng *.schema to *.ldif
+  command: slaptest -f {{ openldap_ldif_tmp_dir }}/schema_conversion.conf -F {{ openldap_ldif_tmp_dir }}
+
+- name: config_openldap_schemas | adding new schemas
+  include_tasks: "config_openldap_schemas_ldifs.yml"
+  with_items: "{{openldap_schemas}}"
+  loop_control:
+    loop_var: schema
+
+- name: config_openldap_schemas | deleting temp folder
+  file:
+    path: '{{ openldap_ldif_tmp_dir }}'
+    state: absent
+  become: true
+

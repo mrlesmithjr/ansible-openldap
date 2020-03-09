@@ -1,0 +1,3 @@
+{% for schema in openldap_schemas %}
+include		/etc/ldap/schema/{{ schema }}.schema
+{% endfor %}
