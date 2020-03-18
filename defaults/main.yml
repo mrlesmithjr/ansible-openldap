@@ -67,3 +67,15 @@ openldap_db_engine: MDB
 
 # Temp files path
 openldap_ldif_tmp_dir: /tmp/ldifs
+
+# Define a the set of ldif files to configure some Overlays or ACLs
+# All ldif files must be placed in files/openldap/overlays/
+# Use example
+#openldap_overlays_and_acls:
+#  - name: overlay1
+#    ldifs: 
+#      - path: file1.ldif
+#        action: modify //ldapmodify
+#      - path: file2.ldif
+#        action: add //ldapadd
+openldap_overlays_and_acls: []
