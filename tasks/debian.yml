@@ -27,6 +27,9 @@
     - question: shared/organization
       value: "{{ openldap_org }}"
       vtype: string
+    - question: slapd/backend
+      value: "{{ openldap_db_engine }}"
+      vtype: string
 
 - name: debian | installing packages
   apt:

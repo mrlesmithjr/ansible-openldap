@@ -1,0 +1,30 @@
+---
+- name: config_openldap_schemas_ldfis | getting converted *.ldif
+  find:
+    paths: '{{ openldap_ldif_tmp_dir }}/cn=config/cn=schema/'
+    patterns: '*{{ schema }}.ldif'
+  register: converted_ldif
+
+- name: config_openldap_schemas_ldfis | correcting dn in ldif
+  lineinfile:
+    path: "{{ converted_ldif.files[0].path }}"
+    regexp: "^dn: cn={[0-9]*}{{schema}}$"
+    line: "dn: cn={{schema}},cn=schema,cn=config"
+
+- name: config_openldap_schemas_ldfis | correcting cn in ldif
+  lineinfile:
+    path: "{{ converted_ldif.files[0].path }}"
+    regexp: "^cn: {[0-9]*}{{schema}}$"
+    line: "cn: {{schema}}"
+
+- name: config_openldap_schemas_ldfis | removing file lines in ldif
+  lineinfile:
+    path: "{{ converted_ldif.files[0].path }}"
+    regexp: "^{{item}}"
+    state: "absent"
+  with_items: ["structuralObjectClass:","entryUUID:","creatorsName:","createTimestamp:","entryCSN:","modifiersName:","modifyTimestamp:"]
+
+- name: config_openldap_schemas_ldfis | adding new schema to LDAP tree
+  command: ldapadd -Y EXTERNAL -H ldapi:/// -f {{ converted_ldif.files[0].path }}
+  ignore_errors: yes #fails on duplicate
+

@@ -18,6 +18,10 @@
   become: true
   when: '"phpldapadmin" in openldap_debian_packages'
 
+- name: config_openldap | extending LDAP Schema
+  include_tasks: config_openldap_schemas.yml
+  when: openldap_schemas|length > 0
+
 - name: config_openldap | creating database population config
   template:
     src: etc/ldap/slapd.d/populate_content.ldif.j2
