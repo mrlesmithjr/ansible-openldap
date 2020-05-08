@@ -33,7 +33,7 @@
 
 - name: config_openldap_schemas | adding new schemas
   include_tasks: "config_openldap_schemas_ldifs.yml"
-  with_items: "{{openldap_schemas}}"
+  with_items: "{{ openldap_schemas }}"
   loop_control:
     loop_var: schema
 
