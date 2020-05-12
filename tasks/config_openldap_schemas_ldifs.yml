@@ -8,19 +8,19 @@
 - name: config_openldap_schemas_ldfis | correcting dn in ldif
   lineinfile:
     path: "{{ converted_ldif.files[0].path }}"
-    regexp: "^dn: cn={[0-9]*}{{schema}}$"
-    line: "dn: cn={{schema}},cn=schema,cn=config"
+    regexp: "^dn: cn={[0-9]*}{{ schema }}$"
+    line: "dn: cn={{ schema }},cn=schema,cn=config"
 
 - name: config_openldap_schemas_ldfis | correcting cn in ldif
   lineinfile:
     path: "{{ converted_ldif.files[0].path }}"
-    regexp: "^cn: {[0-9]*}{{schema}}$"
-    line: "cn: {{schema}}"
+    regexp: "^cn: {[0-9]*}{{ schema }}$"
+    line: "cn: {{ schema }}"
 
 - name: config_openldap_schemas_ldfis | removing file lines in ldif
   lineinfile:
     path: "{{ converted_ldif.files[0].path }}"
-    regexp: "^{{item}}"
+    regexp: "^{{ item }}"
     state: "absent"
   with_items: ["structuralObjectClass:","entryUUID:","creatorsName:","createTimestamp:","entryCSN:","modifiersName:","modifyTimestamp:"]
 
