@@ -9,6 +9,7 @@ dn: cn={{ item.name }},ou={{ item.ou }},{{ openldap_base }}
 objectClass: posixGroup
 cn: {{ item.name }}
 gidNumber: {{ item.gidNum }}
+
 {% endfor %}
 
 {% for item in openldap_users %}
@@ -27,4 +28,5 @@ userPassword: {{ item.password }}
 gecos: {{ item.FirstName }} {{ item.LastName }}
 loginShell: {{ item.loginShell }}
 homeDirectory: {{ item.homeDirectory }}
+
 {% endfor %}
