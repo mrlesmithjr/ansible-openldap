@@ -78,4 +78,7 @@ openldap_ldif_tmp_dir: /tmp/ldifs
 #        action: modify //ldapmodify
 #      - path: file2.ldif
 #        action: add //ldapadd
+#      - path: template.ldif
+#        action: add //ldapadd
+#        template: true
 openldap_overlays_and_acls: []
