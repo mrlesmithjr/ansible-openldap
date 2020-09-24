@@ -7,6 +7,18 @@
     group: 'root'
     mode: '0640'
   become: true
+  when: not item.template is defined or not item.template
+  with_items: "{{overlay.ldifs}}"
+
+- name: config_openldap_overlays | template ldif files
+  template:
+    src: 'files/openldap/overlays/{{ item.path }}'
+    dest: '{{ openldap_ldif_tmp_dir }}/{{ item.path }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  become: true
+  when: item.template is defined and item.template
   with_items: "{{overlay.ldifs}}"
 
 - name: config_openldap_overlays | applying or configuring overlay
