@@ -11,13 +11,10 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: debian10
-    image: jrei/systemd-debian:10
+  - name: debian12
+    image: jrei/systemd-debian:12
     privileged: true
     command: /lib/systemd/systemd
-    # tmpfs:
-    #   - /run
-    #   - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
