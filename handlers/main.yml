@@ -1,7 +1,7 @@
 ---
 # handlers file for ansible-openldap
 - name: restart slapd
-  service:
+  ansible.builtin.service:
     name: slapd
     state: restarted
   become: true

@@ -1,6 +1,6 @@
 ---
 - name: debian | ensure debconf-utils is installed
-  apt:
+  ansible.builtin.apt:
     name: debconf-utils
     state: present
     update_cache: true
@@ -10,7 +10,7 @@
   until: result is successful
 
 - name: debian | definining openldap install settings
-  debconf:
+  ansible.builtin.debconf:
     name: slapd
     question: "{{ item['question'] }}"
     value: "{{ item['value'] }}"
@@ -42,7 +42,7 @@
       vtype: string
 
 - name: debian | installing packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ openldap_debian_packages }}"
     state: present
     update_cache: true
