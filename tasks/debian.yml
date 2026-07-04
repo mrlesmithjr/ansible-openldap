@@ -1,4 +1,14 @@
 ---
+- name: debian | ensure debconf-utils is installed
+  apt:
+    name: debconf-utils
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+  register: result
+  until: result is successful
+
 - name: debian | definining openldap install settings
   debconf:
     name: slapd
@@ -35,6 +45,8 @@
   apt:
     name: "{{ openldap_debian_packages }}"
     state: present
+    update_cache: true
+    cache_valid_time: 3600
   become: true
   register: result
   until: result is successful

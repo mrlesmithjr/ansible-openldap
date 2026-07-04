@@ -9,4 +9,4 @@
     #     name: ansible-etc-hosts
     - name: Include ansible-openldap
       include_role:
-        name: ansible-openldap
+        name: mrlesmithjr.openldap

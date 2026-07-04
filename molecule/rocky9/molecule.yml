@@ -4,22 +4,25 @@ dependency:
   enabled: true
   options:
     role-file: requirements.yml
+    requirements-file: requirements.yml
 driver:
   name: docker
+ansible:
+  cfg:
+    defaults:
+      inject_invocation: true
 lint: |
   yamllint .
   ansible-lint
   flake8
 platforms:
-  - name: debian8
-    image: jrei/systemd-debian:8
+  - name: rocky9
+    image: mrlesmithjr/rocky:9
     privileged: true
-    command: /lib/systemd/systemd
-    # tmpfs:
-    #   - /run
-    #   - /tmp
+    command: /usr/sbin/init
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
 provisioner:
   name: ansible
   playbooks:

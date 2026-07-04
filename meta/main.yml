@@ -1,26 +1,20 @@
 ---
 galaxy_info:
   author: Larry Smith Jr.
+  namespace: mrlesmithjr
+  role_name: openldap
   description: Installs and configures OpenLDAP and phpLDAPadmin
   license: MIT
   min_ansible_version: 2.8
 
   platforms:
+    - name: Debian
+      versions:
+        - "12"
     - name: Ubuntu
       versions:
-        - bionic
-        - trusty
-        - xenial
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+        - "22.04"
+        - "24.04"
 
   galaxy_tags:
     - administration

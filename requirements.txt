@@ -4,4 +4,5 @@ ansible-lint
 docker
 flake8
 molecule
+molecule-plugins[docker]
 testinfra
