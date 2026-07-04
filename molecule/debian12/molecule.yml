@@ -16,7 +16,7 @@ lint: |
   flake8
 platforms:
   - name: debian12
-    image: jrei/systemd-debian:12
+    image: mrlesmithjr/debian:12
     privileged: true
     command: /lib/systemd/systemd
     volumes:
