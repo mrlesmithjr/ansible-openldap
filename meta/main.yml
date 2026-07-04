@@ -15,12 +15,6 @@ galaxy_info:
       versions:
         - "22.04"
         - "24.04"
-    - name: Fedora
-      versions:
-        - "42"
-    - name: EL
-      versions:
-        - "9"
 
   galaxy_tags:
     - administration
