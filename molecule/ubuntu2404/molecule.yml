@@ -6,6 +6,10 @@ dependency:
     role-file: requirements.yml
 driver:
   name: docker
+ansible:
+  cfg:
+    defaults:
+      inject_invocation: true
 lint: |
   yamllint .
   ansible-lint
