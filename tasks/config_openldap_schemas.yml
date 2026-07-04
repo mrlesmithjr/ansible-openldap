@@ -1,6 +1,6 @@
 ---
 - name: config_openldap_schemas | copying schemas files
-  copy:
+  ansible.builtin.copy:
     src: '{{ item }}'
     dest: '/etc/ldap/schema/'
     owner: 'root'
@@ -11,7 +11,7 @@
   become: true
 
 - name: config_openldap_schemas | creating a conversion file
-  template:
+  ansible.builtin.template:
     src: etc/ldap/slapd.d/schema_conversion.conf.j2
     dest: '{{ openldap_ldif_tmp_dir }}/schema_conversion.conf'
     owner: root
@@ -20,10 +20,10 @@
   become: true
 
 - name: config_openldap_schemas | covertyng *.schema to *.ldif
-  command: slaptest -f {{ openldap_ldif_tmp_dir }}/schema_conversion.conf -F {{ openldap_ldif_tmp_dir }}
+  ansible.builtin.command: slaptest -f {{ openldap_ldif_tmp_dir }}/schema_conversion.conf -F {{ openldap_ldif_tmp_dir }}
 
 - name: config_openldap_schemas | adding new schemas
-  include_tasks: "config_openldap_schemas_ldifs.yml"
+  ansible.builtin.include_tasks: "config_openldap_schemas_ldifs.yml"
   with_items: "{{ openldap_schemas }}"
   loop_control:
     loop_var: schema
