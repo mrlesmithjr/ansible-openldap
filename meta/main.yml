@@ -5,7 +5,7 @@ galaxy_info:
   role_name: openldap
   description: Installs and configures OpenLDAP and phpLDAPadmin
   license: MIT
-  min_ansible_version: 2.8
+  min_ansible_version: 2.16
 
   platforms:
     - name: Debian

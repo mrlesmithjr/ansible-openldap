@@ -8,10 +8,6 @@ Installs and configures [OpenLDAP](http://www.openldap.org/) and phpLDAPadmin
 
 ![Molecule Test](https://github.com/mrlesmithjr/ansible-openldap/workflows/Molecule%20Test/badge.svg)
 
-### Travis CI
-
-[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-openldap.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-openldap)
-
 ## Requirements
 
 For any required Ansible roles, review:
